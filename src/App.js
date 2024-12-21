@@ -1,21 +1,25 @@
 import React from 'react';  
-import { BrowserRouter, Route, Routes } from 'react-router-dom';  
+import { BrowserRouter, Route, Switch } from 'react-router-dom';  
+import Navigation from './components/Navigation';  
 import Home from './components/Home';  
 import BrowseCharacters from './components/BrowseCharacters';  
-import CharacterDetails from './components/CharacterDetails';  
 import Comics from './components/Comics';  
+import CharacterDetails from './components/CharacterDetails';  
+import NotFound from './components/NotFound';  
   
-function App() {  
+const App = () => {  
   return (  
    <BrowserRouter>  
-    <Routes>  
-      <Route path="/" element={<Home />} />  
-      <Route path="/browse-characters" element={<BrowseCharacters />} />  
-      <Route path="/character-details/:id" element={<CharacterDetails />} />  
-      <Route path="/comics" element={<Comics />} />  
-    </Routes>  
+    <Navigation />  
+    <Switch>  
+      <Route path="/" exact component={Home} />  
+      <Route path="/browse-characters" component={BrowseCharacters} />  
+      <Route path="/comics" component={Comics} />  
+      <Route path="/characters/:characterId" component={CharacterDetails} />  
+      <Route component={NotFound} />  
+    </Switch>  
    </BrowserRouter>  
   );  
-}  
+};  
   
 export default App;
